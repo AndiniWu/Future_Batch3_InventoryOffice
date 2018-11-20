@@ -30,15 +30,15 @@ public class UserService {
 //        this.roleRepository=roleRepository;
 //    }
 //
+    public User findUserById(long id){return userRepository.findById(id);}
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
     public User saveUser(User user){
         return userRepository.save(user);
     }
-//    public User saveUser(User user, int roleId){
-//        Role userRole = roleRepository.findById(roleId);
-//        user.setRole((Set<Role>) userRole);
-//        return userRepository.save(user);
-//    }
+    public void deleteUser(User user){
+        userRepository.delete(user);
+    }
+
 }

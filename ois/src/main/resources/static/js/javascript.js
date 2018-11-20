@@ -6,7 +6,7 @@ $("#register").click(function () {
     console.log(  '{"name": "' + name + '", "password": "' + password + '", "email": "'+ email +'", "role": "'+ role +'"}');
     $.ajax({
         type: 'POST',
-        url: 'http://localhost:8080/registration',
+        url: 'http://localhost:8080/api/users',
         data:
             '{"name": "' + name + '", "password": "' + password + '", "email": "'+ email +'", "role": "'+ role +'"}',
         headers: {
@@ -16,7 +16,7 @@ $("#register").click(function () {
         success: function(data){
             var msg ="Call Success. result: ";
             if(data===false){
-                msg+="Data Error, failed to save user"
+                msg+="There is already a user registered with the email provided"
             }
             else {
                 msg+="Successed to save user"
