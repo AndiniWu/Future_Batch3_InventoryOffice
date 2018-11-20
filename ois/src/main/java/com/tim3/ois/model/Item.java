@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Builder
@@ -23,11 +24,11 @@ public class Item {
     private int id;
 
     @Column(name="price")
-    @NotEmpty(message = "*Please provide the price")
+    @NotNull(message = "*Please provide the price")
     private long price;
 
     @Column(name="quantity")
-    @NotEmpty(message = "*Please provide the quantity")
+    @NotNull(message = "*Please provide the quantity")
     private int quantity;
 
     @Column(name="name")

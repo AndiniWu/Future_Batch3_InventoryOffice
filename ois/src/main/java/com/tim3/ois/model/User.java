@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 
@@ -24,6 +25,10 @@ public class User {
     @Column(name = "user_id")
     private int id;
 
+    @Column(name = "name")
+    @NotEmpty(message = "*Please provide your name")
+    private String name;
+
     @Column(name = "email")
     @Email(message = "*Please provide a valid Email")
     @NotEmpty(message = "*Please provide an email")
@@ -34,13 +39,12 @@ public class User {
     @NotEmpty(message = "*Please provide your password")
     private String password;
 
-    @Column(name = "name")
-    @NotEmpty(message = "*Please provide your name")
-    private String name;
-
     @Column(name = "role")
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private Set<Role> roles;
+    @NotNull(message = "Pleas provide the the role")
+    private int role;
+//    @Column(name = "role")
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+//    private Set<Role> role;
 
 }
