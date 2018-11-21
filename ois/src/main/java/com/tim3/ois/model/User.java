@@ -21,7 +21,8 @@ import java.util.Set;
 @Table(name = "user")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator (name = "id_sequence", sequenceName = "sq50")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_sequence")
     @Column(name = "user_id")
     private int id;
 

@@ -3,12 +3,12 @@ $("#register").click(function () {
     var password=document.getElementById("password").value;
     var name=document.getElementById("name").value;
     var role = document.querySelector('input[name="optradio"]:checked').value;
-    console.log(  '{"name": "' + name + '", "password": "' + password + '", "email": "'+ email +'", "role": "'+ role +'"}');
+    console.log(  '{"name": "' + name + '", "email": "' + email + '", "email": "'+ password +'", "role": "'+ role +'"}');
     $.ajax({
         type: 'POST',
         url: 'http://localhost:8080/api/users',
         data:
-            '{"name": "' + name + '", "password": "' + password + '", "email": "'+ email +'", "role": "'+ role +'"}',
+            '{"name": "' + name + '", "email": "' + email + '", "password": "'+ password +'", "role": "'+ role +'"}',
         headers: {
             "Content-Type": "application/json", "Accept": "application/json"
         },

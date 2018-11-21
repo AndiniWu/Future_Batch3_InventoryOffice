@@ -48,21 +48,21 @@ public class UserController {
     }
 
     @PutMapping("/users/{id}")
-    public User updateUser(@PathVariable(value = "id") Long userId,
+    public User updateUser(@PathVariable(value = "id") int userId,
                            @Valid @RequestBody User userNow) {
         User user = userService.findUserById(userId);
         user.setPassword(userNow.getPassword());
-        userService.saveUser(user);
-        return user;
+        User updatedUser = userService.saveUser(user);
+        return updatedUser;
     }
 
     @DeleteMapping("/users/{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable(value = "id")Long userId,
-                                        @Valid @RequestBody User userNow){
+    public ResponseEntity<?> deleteUser(@PathVariable(value = "id")int userId){
         User user = userService.findUserById(userId);
         userService.deleteUser(user);
         return ResponseEntity.ok().build();
     }
+
 }
 
 

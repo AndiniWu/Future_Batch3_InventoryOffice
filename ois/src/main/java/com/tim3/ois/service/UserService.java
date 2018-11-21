@@ -30,7 +30,7 @@ public class UserService {
 //        this.roleRepository=roleRepository;
 //    }
 //
-    public User findUserById(long id){return userRepository.findById(id);}
+    public User findUserById(int id){return userRepository.findById(id);}
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
