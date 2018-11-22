@@ -74,6 +74,7 @@ public class ItemController {
     @DeleteMapping("/items/{id}")
     public Boolean deleteUser(@PathVariable(value = "id")int itemId){
         Item item = itemService.findItemById(itemId);
+        if(item==null){return false;}
         itemService.deleteItem(item);
         return true;
     }

@@ -55,10 +55,11 @@ public class UserController {
     }
 
     @DeleteMapping("/users/{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable(value = "id")int userId){
+    public Boolean deleteUser(@PathVariable(value = "id")int userId){
         User user = userService.findUserById(userId);
+        if(user==null){return false;}
         userService.deleteUser(user);
-        return ResponseEntity.ok().build();
+        return true;
     }
 
 }

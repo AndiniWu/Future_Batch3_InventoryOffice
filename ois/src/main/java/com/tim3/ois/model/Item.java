@@ -20,7 +20,7 @@ public class Item {
     @Id
     @SequenceGenerator (name = "id_item", sequenceName = "item_seq",allocationSize = 1, initialValue= 1)
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_item")
-    @Column(name = "user_id")
+    @Column(name = "id")
     private int id;
 
     @Column(name="name")
