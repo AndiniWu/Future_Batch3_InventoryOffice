@@ -22,7 +22,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-
     @GetMapping("/users")
     public ModelAndView getRegistration() {
         ModelAndView modelAndView = new ModelAndView();
@@ -32,7 +31,6 @@ public class UserController {
         return modelAndView;
     }
 
-
     @PostMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
     public boolean createNewUser(
             @Valid
@@ -40,7 +38,7 @@ public class UserController {
                     User user, BindingResult bindingResult) {
         User userExists = userService.findUserByEmail(user.getEmail());
         if (userExists != null) {
-            bindingResult.rejectValue("email", "There is already a user registered with the email provided");
+            //bindingResult.rejectValue("email", "There is already a user registered with the email provided");
             return false;
         }
         userService.saveUser(user);

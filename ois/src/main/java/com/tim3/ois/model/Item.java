@@ -17,24 +17,23 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "item")
 public class Item {
-
     @Id
-    @SequenceGenerator (name = "id_seq", sequenceName = "sq50")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_seq")
+    @SequenceGenerator (name = "id_item", sequenceName = "item_seq",allocationSize = 1, initialValue= 1)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_item")
     @Column(name = "user_id")
     private int id;
 
-    @Column(name="price")
-    @NotNull(message = "*Please provide the price")
-    private long price;
+    @Column(name="name")
+    @NotEmpty(message = "*Please provide the name")
+    private String name;
 
     @Column(name="quantity")
     @NotNull(message = "*Please provide the quantity")
     private int quantity;
 
-    @Column(name="name")
-    @NotEmpty(message = "*Please provide the name")
-    private String name;
+    @Column(name="price")
+    @NotNull(message = "*Please provide the price")
+    private long price;
 
     @Column(name="description")
     @NotEmpty(message = "*Please provide the description")

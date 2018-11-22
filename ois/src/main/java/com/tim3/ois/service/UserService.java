@@ -8,28 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+
 
 @Service("userService")
 public class UserService {
 
-
     private UserRepository userRepository;
-//    private RoleRepository roleRepository;
 
     @Autowired
     public UserService(UserRepository userRepository){
         this.userRepository=userRepository;
     }
-//    @Autowired
-//    public UserService(UserRepository userRepository,
-//                       RoleRepository roleRepository){
-//        this.userRepository=userRepository;
-//        this.roleRepository=roleRepository;
-//    }
-//
     public User findUserById(int id){return userRepository.findById(id);}
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
@@ -40,5 +29,4 @@ public class UserService {
     public void deleteUser(User user){
         userRepository.delete(user);
     }
-
 }

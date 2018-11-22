@@ -10,7 +10,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.Set;
 
 
 @Data
@@ -21,8 +20,8 @@ import java.util.Set;
 @Table(name = "user")
 public class User {
     @Id
-    @SequenceGenerator (name = "id_sequence", sequenceName = "sq50")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_sequence")
+    @SequenceGenerator (name = "id_user", sequenceName = "user_seq",allocationSize = 1, initialValue= 1)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_user")
     @Column(name = "user_id")
     private int id;
 
@@ -43,9 +42,5 @@ public class User {
     @Column(name = "role")
     @NotNull(message = "Pleas provide the the role")
     private int role;
-//    @Column(name = "role")
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-//    private Set<Role> role;
 
 }
