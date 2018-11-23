@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
+import java.util.List;
 
 
 @RestController
@@ -29,23 +30,10 @@ public class ItemController {
 //        return modelAndView;
 //    }
     @GetMapping("/items")
-    public String getItem(){
-        return "testing items";
+    public List<Item> getAllItems(){
+        return itemService.findAll();
     }
 
-//    @PostMapping(value = "/items",produces = MediaType.APPLICATION_JSON_VALUE)
-//    public boolean createNewItem(
-//            @Valid
-//            @RequestBody
-//                    Item item, BindingResult bindingResult) {
-//        Item itemExists = itemService.findItemByName(item.getName());
-//        if (itemExists != null) {
-//            bindingResult.rejectValue("item", "There is already an item registered with the name provided");
-//            return false;
-//        }
-//        itemService.saveItem(item);
-//        return true;
-//    }
     @PostMapping(value = "/items", produces = MediaType.APPLICATION_JSON_VALUE)
     public boolean createNewUser(
             @Valid
