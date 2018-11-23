@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Builder
@@ -16,23 +17,23 @@ import javax.validation.constraints.NotEmpty;
 @Entity
 @Table(name = "item")
 public class Item {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "user_id")
+    @SequenceGenerator (name = "id_item", sequenceName = "item_seq",allocationSize = 1, initialValue= 1)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_item")
+    @Column(name = "id")
     private int id;
-
-    @Column(name="price")
-    @NotEmpty(message = "*Please provide the price")
-    private long price;
-
-    @Column(name="quantity")
-    @NotEmpty(message = "*Please provide the quantity")
-    private int quantity;
 
     @Column(name="name")
     @NotEmpty(message = "*Please provide the name")
     private String name;
+
+    @Column(name="quantity")
+    @NotNull(message = "*Please provide the quantity")
+    private int quantity;
+
+    @Column(name="price")
+    @NotNull(message = "*Please provide the price")
+    private long price;
 
     @Column(name="description")
     @NotEmpty(message = "*Please provide the description")

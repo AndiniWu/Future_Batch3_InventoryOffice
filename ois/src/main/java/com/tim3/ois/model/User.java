@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import java.util.Set;
+import javax.validation.constraints.NotNull;
 
 
 @Data
@@ -20,9 +20,14 @@ import java.util.Set;
 @Table(name = "user")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "user_id")
+    @SequenceGenerator (name = "id_user", sequenceName = "user_seq",allocationSize = 1, initialValue= 1)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_user")
+    @Column(name = "id")
     private int id;
+
+    @Column(name = "name")
+    @NotEmpty(message = "*Please provide your name")
+    private String name;
 
     @Column(name = "email")
     @Email(message = "*Please provide a valid Email")
@@ -34,13 +39,8 @@ public class User {
     @NotEmpty(message = "*Please provide your password")
     private String password;
 
-    @Column(name = "name")
-    @NotEmpty(message = "*Please provide your name")
-    private String name;
-
     @Column(name = "role")
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private Set<Role> roles;
+    @NotNull(message = "Pleas provide the the role")
+    private int role;
 
 }
