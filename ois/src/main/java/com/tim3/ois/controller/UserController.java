@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tim3.ois.repository.UserRepository;
 import javax.validation.Valid;
+import java.util.List;
 
 
 @RestController
@@ -22,14 +23,19 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+//    @GetMapping("/users")
+//    public ModelAndView getRegistration() {
+//        ModelAndView modelAndView = new ModelAndView();
+//        User user = new User();
+//        modelAndView.addObject("user", user);
+//        modelAndView.setViewName("registration");
+//        return modelAndView;
+//    }
     @GetMapping("/users")
-    public ModelAndView getRegistration() {
-        ModelAndView modelAndView = new ModelAndView();
-        User user = new User();
-        modelAndView.addObject("user", user);
-        modelAndView.setViewName("registration");
-        return modelAndView;
+    public List<User> getAllUsers(){
+        return userService.findAll();
     }
+
 
     @PostMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
     public boolean createNewUser(

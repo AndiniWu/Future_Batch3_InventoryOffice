@@ -19,7 +19,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name = "request")
-public class Lend {
+public class Request {
     @Id
     @SequenceGenerator (name = "id_lend", sequenceName = "lend_seq",allocationSize = 1, initialValue= 1)
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_user")
@@ -27,21 +27,20 @@ public class Lend {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id",nullable = false)
+    @JoinColumn(name = "request_by",nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
-    @Column(name = "requestDate", nullable = false, updatable = false)
-    private Date requestDate;
+    @Column(name = "request_date", nullable = false, updatable = false)
+    @CreatedDate
+    private Date createdAt;
 
-    @Column(name = "returnDate")
-    private Date returnDate;
+    @Column(name = "return_date")
+    private Date returnAt;
 
     @ManyToMany
-    @JoinTable(name = "request_detail", joinColumns =@JoinColumn(name = "request_id"),inverseJoinColumns = @JoinColumn(name = "item_id"))
-    private Set<Item> items;
+    @JoinTable(name = "request_detail", joinColumns =@JoinColumn(name = "request_id"),inverseJoinColumns = {@JoinColumn(name = "item_id"),@JoinColumn(name = "quantity")})
+    private Set<Item> items; //terakhir buat sampai sini, database table blum di re-create
 
-    @JoinTable(name = "request_detail")
-    private int quantity;
 
 }
