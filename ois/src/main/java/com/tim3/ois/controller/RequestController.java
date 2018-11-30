@@ -43,10 +43,10 @@ public class RequestController {
         for (Item i:request.getItem()){
             item=itemService.findItemById(i.getId());
             System.out.println("item: " + item);
-            itemNow=itemService.findItemById(i.getId());
-            item.setQuantity(item.getQuantity()-itemNow.getQuantity());
+            item.setQuantity(item.getQuantity()-i.getQuantity());
+            System.out.println("updatedItem: " + item.getQuantity() +" " + i.getQuantity());
             itemService.saveItem(item);
-            System.out.println("updatedItem: " + item);
+
         }
 
         return true;

@@ -50,6 +50,10 @@ public class Request {
     @JoinTable(name = "approved_by", joinColumns ={@JoinColumn(name = "req_id")},inverseJoinColumns =@JoinColumn(name = "user_id"))
     private User approvedBy;
 
+//    @OneToOne
+//    @JoinTable(name = "approved_by", joinColumns ={@JoinColumn(name = "req_id")},inverseJoinColumns =@JoinColumn(name = "user_id"))
+//    private User approvedBy;
+
     @Column(name = "approval_date", updatable = false)
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone="GMT")
     private Date approvedAt;
