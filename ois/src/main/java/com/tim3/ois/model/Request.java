@@ -1,4 +1,5 @@
 package com.tim3.ois.model;
+import com.tim3.ois.model.User;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -33,22 +34,28 @@ public class Request {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
+    @Column(name = "message")
+    private String message;
+
     @Column(name = "request_date", updatable = false)
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone="GMT")
     private Date createdAt;
-
-    @Column(name = "return_date")
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone="GMT")
-    private Date returnAt;
-
-//    @ManyToMany
-//    @JoinTable(name = "request_detail", joinColumns =@JoinColumn(name = "request_id"),inverseJoinColumns = {@JoinColumn(name = "item_id"),@JoinColumn(name = "quantity")})
-//    private Set<Item> items; //terakhir buat sampai sini, database table blum di re-create dan error
-
 
     @ManyToMany
     @JoinTable(name = "request_detail", joinColumns ={@JoinColumn(name = "req_id")},inverseJoinColumns =@JoinColumn(name = "item_id"))
     private Set<Item> item;
 
+
+    @OneToOne
+    @JoinTable(name = "approved_by", joinColumns ={@JoinColumn(name = "req_id")},inverseJoinColumns =@JoinColumn(name = "user_id"))
+    private User approvedBy;
+
+    @Column(name = "approval_date", updatable = false)
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone="GMT")
+    private Date approvedAt;
+
+    @Column(name = "return_date")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone="GMT")
+    private Date returnAt;
 
 }
